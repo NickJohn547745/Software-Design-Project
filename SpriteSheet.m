@@ -76,12 +76,13 @@ classdef SpriteSheet < handle
                     % Get the current sprite's transparency data 
                     currentTransparencyData = rawTransparency(yMin:yMax, xMin:xMax, :);
                     
+                    nextIndex = length(obj.c_spriteData) + 1;
+                    
                     % Insert current data into a struct 
                     currentSpriteData.id = currentSpriteId;
                     currentSpriteData.imageData = currentImageData;
                     currentSpriteData.transparencyData = currentTransparencyData;
                     
-                    % Add current sprite struct to an array of all sprites
                     obj.c_spriteData{end+1} = currentSpriteData;
                 end
             end
