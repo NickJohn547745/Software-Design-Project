@@ -1,0 +1,11 @@
+ids|y|x
+Cup_Far|0|24
+Cup_Far|1|16
+Cup_Far|3|29
+Cup_Far|2|8
+Cup_Far|4|19
+Cup_Far|6|32
+Cup_Far|3|0
+Cup_Far|6|10
+Cup_Far|8|22
+Cup_Far|9|35

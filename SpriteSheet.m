@@ -1,14 +1,34 @@
-% HOW WE STORE SPRITES AND DATA FROM INDIVIDUAL FILES
+%% SpriteSheet class
+
+% This handles the loading of sprites and their relative indexing by ids.
 
 classdef SpriteSheet < handle
+    
+    % Class properties of the SpriteSheet
     properties
-        c_spriteData = {}; % color data of the sprites
+        % Map of all of the sprites keyed to their ids
+        c_spriteMap = containers.Map();
+        
+        % The size of every sprite
         c_spriteSize = [0, 0];
     end
     
     methods
+        %% Contract - SpriteSheet(p_filename, p_spriteSize, p_spriteIds)
+        % This is the contructor for the SpriteSheet class. It defines the
+        % class properties based on the input parameters.
+        % 
+        % @param p_filename
+        %   The input filename of the spritesheet image
+        % @param p_spriteSize
+        %   The size of each sprite
+        % @param p_spriteIds
+        %   An array of ids for each sprite
+        %
+        % @updates <class properties>
+        % @requires param(s) ~= NULL
+        
         function obj = SpriteSheet(p_filename, p_spriteSize, p_spriteIds)
-            
             % Get the number of arguments passed to the constructor.
             argumentCount = nargin;
             
@@ -19,9 +39,6 @@ classdef SpriteSheet < handle
                 % Assert error if no parameter for sprite size is provided
                 error("Error: No sprite size provided. Failing initialization of SpriteSheet.");
             end
-            
-            % Set the class variable of sprite size to the parameter variable
-            % spriteSize = p_spriteSize;
             
             % Derive height and width from provided sprite size
             spriteHeight = p_spriteSize(1);
@@ -76,35 +93,17 @@ classdef SpriteSheet < handle
                     % Get the current sprite's transparency data 
                     currentTransparencyData = rawTransparency(yMin:yMax, xMin:xMax, :);
                     
-                    nextIndex = length(obj.c_spriteData) + 1;
+                    % Insert current data into a map 
+                    spriteStruct.imageData = currentImageData;
+                    spriteStruct.transparencyData = currentTransparencyData;
                     
-                    % Insert current data into a struct 
-                    currentSpriteData.id = currentSpriteId;
-                    currentSpriteData.imageData = currentImageData;
-                    currentSpriteData.transparencyData = currentTransparencyData;
+                    obj.c_spriteMap(currentSpriteId) = spriteStruct;
                     
-                    obj.c_spriteData{end+1} = currentSpriteData;
                 end
             end
         end
         function spriteSheet = getSpriteSheet(obj)
-            spriteSheet = obj.c_spriteData;
-        end
-        function sprite = getSpriteById(obj, spriteId)
-            sprite = -1;
-            for index = 1:length(obj.c_spriteData)
-                currentSprite = obj.c_spriteData{index};
-                if currentSprite.id == spriteId
-                    sprite = currentSprite;
-                    break;
-                end
-            end
-        end
-        function addSpriteSheet(obj, spriteSheet)
-            spriteSheetData = getSpriteSheet(spriteSheet);
-            for index = 1:length(spriteSheetData)
-                obj.c_spriteData{end+1} = spriteSheetData{index};
-            end
+            spriteSheet = obj.c_spriteMap;
         end
     end
 end

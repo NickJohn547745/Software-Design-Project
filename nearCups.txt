@@ -1,0 +1,11 @@
+ids|y|x
+Cup_Near|0|0
+Cup_Near|1|13
+Cup_Near|2|26
+Cup_Near|3|38
+Cup_Near|4|3
+Cup_Near|5|16
+Cup_Near|6|29
+Cup_Near|8|7
+Cup_Near|9|20
+Cup_Near|12|12

@@ -1,0 +1,12 @@
+ids|y|x
+Letter_S|0|0
+Letter_O|0|23
+Letter_D|0|45
+Letter_A|0|64
+Letter_S|0|104
+Letter_P|0|125
+Letter_O|0|145
+Letter_R|0|165
+Letter_T|0|183
+Letter_S|0|205
+Letter_Exp|0|224

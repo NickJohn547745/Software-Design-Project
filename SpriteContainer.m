@@ -1,28 +1,84 @@
-% HOW WE REFERENCE SPRITES FROM MULTIPLE SHEETS
+%% SpriteContainer class
+
+% This handles combining and referencing sprites from multiple
+% spritesheets
 
 classdef SpriteContainer < handle
+    
+    % Class properties of the SpriteContainer
     properties
-        c_sprites = {};
+        % Map of the contained sprites
+        c_spriteMap = {};
     end
     
     methods
-        function obj = SpriteContainer(obj, spriteSheet)
+        %% Contract - SpriteContainer(spriteSheet)
+        % This is the contructor for the SpriteContainer class. It defines the
+        % class properties based on the input parameters.
+        % 
+        % @param spriteSheet
+        %   The spritesheet to contain
+        %
+        % @updates <class properties>
+        % @requires param(s) ~= NULL
+        
+        function obj = SpriteContainer(spriteSheet)
+            % Get the sprite map from the given sprite sheet
+            spriteMap = getSpriteSheet(spriteSheet);
             
-            spriteSheetData = getSpriteSheet(spriteSheet);
-            obj.c_sprites = {obj.c_sprites, spriteSheetData};
+            % Add this map to the class's sprite map property
+            obj.c_spriteMap = spriteMap;
             
         end
+        %% Contract - getSpriteSheet(obj)
+        % This is the contructor for the SpriteLayout class. It defines the
+        % class properties based on the input parameters.
+        % 
+        % @param obj
+        %   The SpriteContiner object
+        %
+        % @requires param(s) ~= NULL
+        
         function spriteSheet = getSpriteSheet(obj)
-            spriteSheet = obj.c_spriteData;
+            % Return the sprite map
+            spriteSheet = obj.c_spriteMap;
         end
+        %% Contract - getSpriteById(obj, spriteId)
+        % This is the contructor for the SpriteLayout class. It defines the
+        % class properties based on the input parameters.
+        % 
+        % @param obj
+        %   The SpriteContiner object
+        % @param spriteId
+        %   The unique id of the desired sprite
+        %
+        % @requires param(s) ~= NULL
+        
         function sprite = getSpriteById(obj, spriteId)
-            sprite = -1;
-            for index = 1:length(obj.c_spriteData)
-                currentSprite = obj.c_spriteData(index);
-                if currentSprite.id == spriteId
-                    sprite = currentSprite;
-                end
-            end
+            % Return the desired sprite from the given id
+            sprite = obj.c_spriteMap(spriteId);
+        end
+        %% Contract - addSpriteSheet(obj, spriteSheet)
+        % This is the contructor for the SpriteLayout class. It defines the
+        % class properties based on the input parameters.
+        % 
+        % @param obj
+        %   The SpriteContiner object
+        % @param spriteSheet
+        %   The spritesheet to append to the class's sprite map property
+        %
+        % @updates <class properties>
+        % @requires param(s) ~= NULL
+        
+        function addSpriteSheet(obj, spriteSheet)
+            % Get the sprite map from the given sprite sheet
+            spriteSheetMap = getSpriteSheet(spriteSheet);
+            
+            % Add the given spritesheet's map to the class's sprite map
+            % property
+            obj.c_spriteMap = [obj.c_spriteMap; spriteSheetMap];
         end
     end
 end
+
+% Check if the sprite queue is populated

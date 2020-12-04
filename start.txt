@@ -1,0 +1,4 @@
+ids|y|x
+Start_1|0|0
+Start_2|0|32
+Start_3|0|64
